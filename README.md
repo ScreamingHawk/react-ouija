@@ -63,6 +63,7 @@ Add dependencies to the generated `client/package.json`.
 ```sh
 cd client
 yarn add socket.io-client http-proxy-middleware
+cd ..
 ```
 
 Copy the contents of the `client/src` folder from this repository into your repository.
@@ -70,9 +71,12 @@ This includes hook up to sockets and the proxy.
 
 **Done.**
 
+Test it with the instructions below.
+
 Commit this as your initial framework.
 
 ```sh
+git add .
 git commit -m "Initial framework"
 ```
 
