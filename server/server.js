@@ -10,7 +10,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-const configureExample = require('./routes/example')
+const configureQuestion = require('./routes/question')
 
 const clientFolder = path.join(__dirname, '..', 'client/build')
 
@@ -24,6 +24,7 @@ let connectedCount = 0
 
 const store = {
 	users: [],
+	question: null,
 }
 const common = {
 	countActiveUsers: () => {
@@ -53,7 +54,7 @@ io.on('connection', socket => {
 		io.emit('users is', store.users)
 	})
 
-	configureExample(io, socket, store)
+	configureQuestion(io, socket, store)
 })
 
 // Fail over
