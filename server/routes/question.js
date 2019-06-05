@@ -6,7 +6,13 @@ module.exports = configureQuestion = (io, socket, store) => {
 		// On suggest, if none, set and send to all
 		if (!store.question){
 			store.question = question
+			log.info(`Question: ${store.question}`)
+			// Clear stuff
+			store.lastLetterId = null
+			store.answer = ''
+			// Emit
 			io.emit('question is', store.question)
+			io.emit('answer is', store.answer)
 		}
 	})
 

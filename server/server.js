@@ -10,6 +10,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
+const configureLetter = require('./routes/letter')
 const configureQuestion = require('./routes/question')
 
 const clientFolder = path.join(__dirname, '..', 'client/build')
@@ -25,6 +26,8 @@ let connectedCount = 0
 const store = {
 	users: [],
 	question: null,
+	lastLetterId: null,
+	answer: '',
 }
 const common = {
 	countActiveUsers: () => {
@@ -54,6 +57,7 @@ io.on('connection', socket => {
 		io.emit('users is', store.users)
 	})
 
+	configureLetter(io, socket, store)
 	configureQuestion(io, socket, store)
 })
 
