@@ -44,17 +44,18 @@ io.on('connection', socket => {
 	log.debug("A user connected")
 	connectedCount++
 	log.debug(`There are ${connectedCount} connected users`)
+		io.emit('connected is', connectedCount)
 
 	socket.on('disconnect', () => {
 		log.debug("A user disconnected")
 		connectedCount--
 		log.debug(`There are ${connectedCount} connected users`)
+		io.emit('connected is', connectedCount)
 		// Deactivate user
 		const user = store.users.find(u => u.id === socket.id)
 		if (user){
 			user.active = false
 		}
-		io.emit('users is', store.users)
 	})
 
 	configureLetter(io, socket, store)

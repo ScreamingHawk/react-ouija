@@ -3,22 +3,15 @@ import styled from 'styled-components'
 
 import Answer from './components/Answer'
 import Board from './components/Board'
+import Connected from './components/Connected'
 import Question from './components/Question'
 import socket from './global/socket'
-import ghostLogo from './assets/ghost.png'
 
 const Wrapper = styled.div`
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-`
-
-const GhostImg = styled.img.attrs({
-	src: ghostLogo,
-	alt: 'ghost',
-})`
-	max-width: 200px;
 `
 
 const App = () => {
@@ -67,12 +60,12 @@ const App = () => {
 
 	return (
 		<Wrapper>
-			<GhostImg />
 			<Question question={question} lastQ={lastQ} />
 			<Answer answer={answser} />
 			{ question && (
 				<Board />
 			)}
+			<Connected />
 		</Wrapper>
 	)
 }
