@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 
 import Answer from './components/Answer'
 import Board from './components/Board'
 import Question from './components/Question'
 import socket from './global/socket'
+import ghostLogo from './assets/ghost.png'
 
-function App() {
+const Wrapper = styled.div`
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
+
+const GhostImg = styled.img.attrs({
+	src: ghostLogo,
+	alt: 'ghost',
+})`
+	max-width: 200px;
+`
+
+const App = () => {
 	const [question, setQuestion] = useState(null)
 	const [lastQ, setLastQ] = useState(null)
 	const [answser, setAnswer] = useState('')
@@ -50,13 +66,14 @@ function App() {
 	})
 
 	return (
-		<main>
+		<Wrapper>
+			<GhostImg />
 			<Question question={question} lastQ={lastQ} />
 			<Answer answer={answser} />
 			{ question && (
 				<Board />
 			)}
-		</main>
+		</Wrapper>
 	)
 }
 
