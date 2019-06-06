@@ -29,6 +29,7 @@ const store = {
 	lastLetterId: null,
 	answer: '',
 	history: [],
+	blocked: false,
 }
 const common = {
 	countActiveUsers: () => {
