@@ -4,11 +4,16 @@ module.exports = configureLetter = (io, socket, store) => {
 	socket.on('letter select', letter => {
 		if (letter.toLowerCase() === 'goodbye'){
 			// Complete answer
+			store.history.push({
+				question: store.question,
+				answer: store.answer,
+			})
 			store.question = null
 			log.info(`Answer: ${store.answer}`)
 			// Emit
 			io.emit('goodbye')
 			io.emit('question is', '')
+			io.emit('history is', store.history)
 			io.emit('user blocked', false)
 			return
 		}
@@ -31,4 +36,6 @@ module.exports = configureLetter = (io, socket, store) => {
 		// Send the current answer to the new client
 		socket.emit('answer is', store.answer)
 	}
+	// Send the history
+	socket.emit('history is', store.history)
 }

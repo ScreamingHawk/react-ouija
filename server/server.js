@@ -28,6 +28,7 @@ const store = {
 	question: null,
 	lastLetterId: null,
 	answer: '',
+	history: [],
 }
 const common = {
 	countActiveUsers: () => {
@@ -44,7 +45,7 @@ io.on('connection', socket => {
 	log.debug("A user connected")
 	connectedCount++
 	log.debug(`There are ${connectedCount} connected users`)
-		io.emit('connected is', connectedCount)
+	io.emit('connected is', connectedCount)
 
 	socket.on('disconnect', () => {
 		log.debug("A user disconnected")

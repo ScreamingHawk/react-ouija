@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Answer from './components/Answer'
 import Board from './components/Board'
 import Connected from './components/Connected'
+import History from './components/History'
 import Question from './components/Question'
 import socket from './global/socket'
 
@@ -66,6 +67,7 @@ const App = () => {
 				<Board />
 			)}
 			<Connected />
+			<History />
 		</Wrapper>
 	)
 }
