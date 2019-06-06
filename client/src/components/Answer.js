@@ -9,10 +9,20 @@ const Wrapper = styled.h2`
 `
 
 const Answer = props => {
+
+	const { answer } = props
+
+	if (!answer){
+		return null
+	}
+
 	return (
-		<Wrapper>
-			{props.answer}
-		</Wrapper>
+		<div>
+			<span>Spirits say: </span>
+			<Wrapper>
+				{answer}
+			</Wrapper>
+		</div>
 	)
 }
 
