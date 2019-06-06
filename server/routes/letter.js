@@ -9,11 +9,14 @@ module.exports = configureLetter = (io, socket, store) => {
 			// Emit
 			io.emit('goodbye')
 			io.emit('question is', '')
+			io.emit('user blocked', false)
 			return
 		}
 		if (store.lastLetterId !== socket.id){
 			// New person must pick
+			io.to(store.lastLetterId).emit('user blocked', false)
 			store.lastLetterId = socket.id
+			socket.emit('user blocked', true)
 			letter = letter[0]
 			log.info(`Adding letter: ${letter}`)
 			store.answer += letter

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import Goodbye from './Goodbye'
@@ -79,7 +79,31 @@ const MobileBoard = () => {
 }
 
 const Board = () => {
-	console.log(window.innerWidth)
+
+	const [blocked, setBlocked] = useState(false)
+
+	useEffect(() => {
+		// Listen for user block
+		socket.on('user blocked', b => {
+			console.log(`Setting user blocked to ${b}`)
+			setBlocked(b)
+		})
+
+		// Unsub
+		return () => {
+			socket.off('user blocked')
+		}
+	})
+
+	if (blocked){
+		// Can't send a thing
+		return (
+			<Wrapper>
+				<p><i>Waiting for other spirits...</i></p>
+			</Wrapper>
+		)
+	}
+
 	if (window.innerWidth >= MOBILE_BREAKPOINT){
 		return DesktopBoard()
 	}
